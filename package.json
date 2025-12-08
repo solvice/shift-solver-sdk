@@ -2,7 +2,7 @@
   "name": "solvice-shift-solver",
   "version": "0.0.1",
   "description": "The official TypeScript library for the Solvice Shift Solver API",
-  "author": "Solvice Shift Solver <>",
+  "author": "Solvice Shift Solver <info@solvice.io>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",

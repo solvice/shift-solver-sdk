@@ -3,7 +3,11 @@
 export {
   Fill,
   type DayOfWeek,
+  type FillExplanation,
+  type FillOptions,
   type FillRequest,
+  type FillWeights,
+  type IdleWeekendDefinition,
   type Message,
   type Period,
   type PeriodType,
