@@ -127,7 +127,7 @@ export interface FillRequest {
   /**
    * List of assignments that are pre-set. (optional)
    */
-  assignments?: unknown;
+  assignments?: Array<FillRequest.Assignment> | null;
 
   /**
    * List of shift demands. Demands are periodic minima and maxima for a certain
@@ -174,8 +174,6 @@ export interface FillRequest {
    */
   rules?: Array<Rule> | null;
 
-  schedule?: Array<FillRequest.Schedule> | null;
-
   /**
    * Weights adjust objectives and scores.
    */
@@ -220,12 +218,10 @@ export namespace FillRequest {
      */
     periodRules?: Array<Employee.PeriodRule> | null;
 
-    preference?: Array<string> | null;
-
     /**
      * Shift preferences of the employee. List of shift tags.
      */
-    preferences?: unknown;
+    preferences?: Array<string> | null;
 
     /**
      * Skills of the employee
@@ -479,7 +475,7 @@ export namespace FillRequest {
     /**
      * Shift rests can define required idle/rest time after the shift.
      */
-    rests?: unknown;
+    rests?: Array<Shift.Rest> | null;
 
     /**
      * Skills required for the shift
@@ -495,9 +491,80 @@ export namespace FillRequest {
   }
 
   export namespace Shift {
+    /**
+     * Rest time before and after shifts
+     */
+    export interface Rest {
+      /**
+       * Filter by shift tag excludes
+       */
+      excludes?: Array<string> | null;
+
+      /**
+       * Maximum number of rest periods
+       */
+      frequency?: number | null;
+
+      /**
+       * Maximum duration
+       */
+      max?: string | null;
+
+      /**
+       * Minimum duration
+       */
+      min?: string | null;
+
+      /**
+       * Minimum consecutive duration of a rest.
+       */
+      minConsecutive?: string | null;
+
+      /**
+       * Period
+       */
+      period?: FillAPI.Period | null;
+
+      /**
+       * Rest type (`CONSECUTIVE` or `WEEKLY`)
+       */
+      periodType?: FillAPI.PeriodType | null;
+
+      /**
+       * If the rest needs to be `BEFORE` or `AFTER` a shift (`tags` must be applied as
+       * well)
+       */
+      sequence?: 'BEFORE' | 'AFTER' | null;
+
+      /**
+       * Filter by shift tag
+       */
+      tags?: Array<string> | null;
+    }
+
     export interface Tag {
       name: string;
     }
+  }
+
+  /**
+   * Input assignment
+   */
+  export interface Assignment {
+    /**
+     * Name of the employee
+     */
+    employee: string;
+
+    /**
+     * Name of the shift
+     */
+    shift: string;
+
+    /**
+     * If the shift is locked. Locked shifts cannot be touched by the solver
+     */
+    locked?: boolean;
   }
 
   /**
@@ -671,26 +738,6 @@ export namespace FillRequest {
      * Filter by shift tag
      */
     tags?: Array<string> | null;
-  }
-
-  /**
-   * Input assignment
-   */
-  export interface Schedule {
-    /**
-     * Name of the employee
-     */
-    employee: string;
-
-    /**
-     * Name of the shift
-     */
-    shift: string;
-
-    /**
-     * If the shift is locked. Locked shifts cannot be touched by the solver
-     */
-    locked?: boolean;
   }
 }
 
@@ -823,7 +870,7 @@ export interface Period {
   /**
    * Duration of the rolling period. Do not use this in combo with from/to
    */
-  period?: unknown;
+  period?: string | null;
 
   /**
    * End of the period
@@ -877,9 +924,7 @@ export interface Rule {
   /**
    * Shift tags to filter this rule by. For example only shifts with the tag `EARLY`.
    */
-  shifts?: unknown;
-
-  tags?: Array<string> | null;
+  shifts?: Array<string> | null;
 
   /**
    * Rule that the solver needs to take into account.
@@ -967,7 +1012,7 @@ export interface FillEvaluateParams {
   /**
    * List of assignments that are pre-set. (optional)
    */
-  assignments?: unknown;
+  assignments?: Array<FillEvaluateParams.Assignment> | null;
 
   /**
    * List of shift demands. Demands are periodic minima and maxima for a certain
@@ -1014,8 +1059,6 @@ export interface FillEvaluateParams {
    */
   rules?: Array<Rule> | null;
 
-  schedule?: Array<FillEvaluateParams.Schedule> | null;
-
   /**
    * Weights adjust objectives and scores.
    */
@@ -1060,12 +1103,10 @@ export namespace FillEvaluateParams {
      */
     periodRules?: Array<Employee.PeriodRule> | null;
 
-    preference?: Array<string> | null;
-
     /**
      * Shift preferences of the employee. List of shift tags.
      */
-    preferences?: unknown;
+    preferences?: Array<string> | null;
 
     /**
      * Skills of the employee
@@ -1319,7 +1360,7 @@ export namespace FillEvaluateParams {
     /**
      * Shift rests can define required idle/rest time after the shift.
      */
-    rests?: unknown;
+    rests?: Array<Shift.Rest> | null;
 
     /**
      * Skills required for the shift
@@ -1335,9 +1376,80 @@ export namespace FillEvaluateParams {
   }
 
   export namespace Shift {
+    /**
+     * Rest time before and after shifts
+     */
+    export interface Rest {
+      /**
+       * Filter by shift tag excludes
+       */
+      excludes?: Array<string> | null;
+
+      /**
+       * Maximum number of rest periods
+       */
+      frequency?: number | null;
+
+      /**
+       * Maximum duration
+       */
+      max?: string | null;
+
+      /**
+       * Minimum duration
+       */
+      min?: string | null;
+
+      /**
+       * Minimum consecutive duration of a rest.
+       */
+      minConsecutive?: string | null;
+
+      /**
+       * Period
+       */
+      period?: FillAPI.Period | null;
+
+      /**
+       * Rest type (`CONSECUTIVE` or `WEEKLY`)
+       */
+      periodType?: FillAPI.PeriodType | null;
+
+      /**
+       * If the rest needs to be `BEFORE` or `AFTER` a shift (`tags` must be applied as
+       * well)
+       */
+      sequence?: 'BEFORE' | 'AFTER' | null;
+
+      /**
+       * Filter by shift tag
+       */
+      tags?: Array<string> | null;
+    }
+
     export interface Tag {
       name: string;
     }
+  }
+
+  /**
+   * Input assignment
+   */
+  export interface Assignment {
+    /**
+     * Name of the employee
+     */
+    employee: string;
+
+    /**
+     * Name of the shift
+     */
+    shift: string;
+
+    /**
+     * If the shift is locked. Locked shifts cannot be touched by the solver
+     */
+    locked?: boolean;
   }
 
   /**
@@ -1512,26 +1624,6 @@ export namespace FillEvaluateParams {
      */
     tags?: Array<string> | null;
   }
-
-  /**
-   * Input assignment
-   */
-  export interface Schedule {
-    /**
-     * Name of the employee
-     */
-    employee: string;
-
-    /**
-     * Name of the shift
-     */
-    shift: string;
-
-    /**
-     * If the shift is locked. Locked shifts cannot be touched by the solver
-     */
-    locked?: boolean;
-  }
 }
 
 export interface FillSolveParams {
@@ -1548,7 +1640,7 @@ export interface FillSolveParams {
   /**
    * List of assignments that are pre-set. (optional)
    */
-  assignments?: unknown;
+  assignments?: Array<FillSolveParams.Assignment> | null;
 
   /**
    * List of shift demands. Demands are periodic minima and maxima for a certain
@@ -1595,8 +1687,6 @@ export interface FillSolveParams {
    */
   rules?: Array<Rule> | null;
 
-  schedule?: Array<FillSolveParams.Schedule> | null;
-
   /**
    * Weights adjust objectives and scores.
    */
@@ -1641,12 +1731,10 @@ export namespace FillSolveParams {
      */
     periodRules?: Array<Employee.PeriodRule> | null;
 
-    preference?: Array<string> | null;
-
     /**
      * Shift preferences of the employee. List of shift tags.
      */
-    preferences?: unknown;
+    preferences?: Array<string> | null;
 
     /**
      * Skills of the employee
@@ -1900,7 +1988,7 @@ export namespace FillSolveParams {
     /**
      * Shift rests can define required idle/rest time after the shift.
      */
-    rests?: unknown;
+    rests?: Array<Shift.Rest> | null;
 
     /**
      * Skills required for the shift
@@ -1916,9 +2004,80 @@ export namespace FillSolveParams {
   }
 
   export namespace Shift {
+    /**
+     * Rest time before and after shifts
+     */
+    export interface Rest {
+      /**
+       * Filter by shift tag excludes
+       */
+      excludes?: Array<string> | null;
+
+      /**
+       * Maximum number of rest periods
+       */
+      frequency?: number | null;
+
+      /**
+       * Maximum duration
+       */
+      max?: string | null;
+
+      /**
+       * Minimum duration
+       */
+      min?: string | null;
+
+      /**
+       * Minimum consecutive duration of a rest.
+       */
+      minConsecutive?: string | null;
+
+      /**
+       * Period
+       */
+      period?: FillAPI.Period | null;
+
+      /**
+       * Rest type (`CONSECUTIVE` or `WEEKLY`)
+       */
+      periodType?: FillAPI.PeriodType | null;
+
+      /**
+       * If the rest needs to be `BEFORE` or `AFTER` a shift (`tags` must be applied as
+       * well)
+       */
+      sequence?: 'BEFORE' | 'AFTER' | null;
+
+      /**
+       * Filter by shift tag
+       */
+      tags?: Array<string> | null;
+    }
+
     export interface Tag {
       name: string;
     }
+  }
+
+  /**
+   * Input assignment
+   */
+  export interface Assignment {
+    /**
+     * Name of the employee
+     */
+    employee: string;
+
+    /**
+     * Name of the shift
+     */
+    shift: string;
+
+    /**
+     * If the shift is locked. Locked shifts cannot be touched by the solver
+     */
+    locked?: boolean;
   }
 
   /**
@@ -2093,26 +2252,6 @@ export namespace FillSolveParams {
      */
     tags?: Array<string> | null;
   }
-
-  /**
-   * Input assignment
-   */
-  export interface Schedule {
-    /**
-     * Name of the employee
-     */
-    employee: string;
-
-    /**
-     * Name of the shift
-     */
-    shift: string;
-
-    /**
-     * If the shift is locked. Locked shifts cannot be touched by the solver
-     */
-    locked?: boolean;
-  }
 }
 
 export interface FillSuggestParams {
@@ -2129,7 +2268,7 @@ export interface FillSuggestParams {
   /**
    * List of assignments that are pre-set. (optional)
    */
-  assignments?: unknown;
+  assignments?: Array<FillSuggestParams.Assignment> | null;
 
   /**
    * List of shift demands. Demands are periodic minima and maxima for a certain
@@ -2176,8 +2315,6 @@ export interface FillSuggestParams {
    */
   rules?: Array<Rule> | null;
 
-  schedule?: Array<FillSuggestParams.Schedule> | null;
-
   /**
    * Weights adjust objectives and scores.
    */
@@ -2222,12 +2359,10 @@ export namespace FillSuggestParams {
      */
     periodRules?: Array<Employee.PeriodRule> | null;
 
-    preference?: Array<string> | null;
-
     /**
      * Shift preferences of the employee. List of shift tags.
      */
-    preferences?: unknown;
+    preferences?: Array<string> | null;
 
     /**
      * Skills of the employee
@@ -2481,7 +2616,7 @@ export namespace FillSuggestParams {
     /**
      * Shift rests can define required idle/rest time after the shift.
      */
-    rests?: unknown;
+    rests?: Array<Shift.Rest> | null;
 
     /**
      * Skills required for the shift
@@ -2497,9 +2632,80 @@ export namespace FillSuggestParams {
   }
 
   export namespace Shift {
+    /**
+     * Rest time before and after shifts
+     */
+    export interface Rest {
+      /**
+       * Filter by shift tag excludes
+       */
+      excludes?: Array<string> | null;
+
+      /**
+       * Maximum number of rest periods
+       */
+      frequency?: number | null;
+
+      /**
+       * Maximum duration
+       */
+      max?: string | null;
+
+      /**
+       * Minimum duration
+       */
+      min?: string | null;
+
+      /**
+       * Minimum consecutive duration of a rest.
+       */
+      minConsecutive?: string | null;
+
+      /**
+       * Period
+       */
+      period?: FillAPI.Period | null;
+
+      /**
+       * Rest type (`CONSECUTIVE` or `WEEKLY`)
+       */
+      periodType?: FillAPI.PeriodType | null;
+
+      /**
+       * If the rest needs to be `BEFORE` or `AFTER` a shift (`tags` must be applied as
+       * well)
+       */
+      sequence?: 'BEFORE' | 'AFTER' | null;
+
+      /**
+       * Filter by shift tag
+       */
+      tags?: Array<string> | null;
+    }
+
     export interface Tag {
       name: string;
     }
+  }
+
+  /**
+   * Input assignment
+   */
+  export interface Assignment {
+    /**
+     * Name of the employee
+     */
+    employee: string;
+
+    /**
+     * Name of the shift
+     */
+    shift: string;
+
+    /**
+     * If the shift is locked. Locked shifts cannot be touched by the solver
+     */
+    locked?: boolean;
   }
 
   /**
@@ -2673,26 +2879,6 @@ export namespace FillSuggestParams {
      * Filter by shift tag
      */
     tags?: Array<string> | null;
-  }
-
-  /**
-   * Input assignment
-   */
-  export interface Schedule {
-    /**
-     * Name of the employee
-     */
-    employee: string;
-
-    /**
-     * Name of the shift
-     */
-    shift: string;
-
-    /**
-     * If the shift is locked. Locked shifts cannot be touched by the solver
-     */
-    locked?: boolean;
   }
 }
 
