@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 (2025-12-08)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/solvice/shift-solver-sdk/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** manual updates ([9e50043](https://github.com/solvice/shift-solver-sdk/commit/9e50043ea867aa39a0fa88352f3406abc7c37212))
+
 ## 0.2.0 (2025-12-08)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/solvice/shift-solver-sdk/compare/v0.1.0...v0.2.0)
