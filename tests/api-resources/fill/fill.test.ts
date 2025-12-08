@@ -24,7 +24,9 @@ describe('resource fill', () => {
   test.skip('evaluate: only required params', async () => {
     const responsePromise = client.fill.evaluate({
       employees: [{ name: 'name' }],
-      shifts: [{ from: '2022-03-10T12:15:50', max: 0, min: 0, name: 'name', to: '2022-03-10T12:15:50' }],
+      shifts: [
+        { from: '2019-12-27T18:11:19.117Z', max: 0, min: 0, name: 'name', to: '2019-12-27T18:11:19.117Z' },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,8 +45,8 @@ describe('resource fill', () => {
           name: 'name',
           availability: [
             {
-              from: '2022-03-10T12:15:50',
-              to: '2022-03-10T12:15:50',
+              from: '2019-12-27T18:11:19.117Z',
+              to: '2019-12-27T18:11:19.117Z',
               location: { lat: 51.12042, lon: 4.23054 },
             },
           ],
@@ -73,9 +75,9 @@ describe('resource fill', () => {
               period: {
                 duration: 'P1D',
                 excludes: ['2022-03-10'],
-                from: '2022-03-10T12:15:50',
+                from: '2019-12-27T18:11:19.117Z',
                 period: 'P1D',
-                to: '2022-03-10T12:15:50',
+                to: '2019-12-27T18:11:19.117Z',
                 type: 'DAILY',
               },
               earliestShiftStart: '13:45:30.123456789',
@@ -93,7 +95,7 @@ describe('resource fill', () => {
               minWorkingDuration: 'P1D',
             },
           ],
-          preferences: ['string'],
+          preference: ['string'],
           skills: [
             {
               name: 'name',
@@ -101,9 +103,9 @@ describe('resource fill', () => {
               period: {
                 duration: 'P1D',
                 excludes: ['2022-03-10'],
-                from: '2022-03-10T12:15:50',
+                from: '2019-12-27T18:11:19.117Z',
                 period: 'P1D',
-                to: '2022-03-10T12:15:50',
+                to: '2019-12-27T18:11:19.117Z',
                 type: 'DAILY',
               },
               weight: 0,
@@ -113,11 +115,11 @@ describe('resource fill', () => {
       ],
       shifts: [
         {
-          from: '2022-03-10T12:15:50',
+          from: '2019-12-27T18:11:19.117Z',
           max: 0,
           min: 0,
           name: 'name',
-          to: '2022-03-10T12:15:50',
+          to: '2019-12-27T18:11:19.117Z',
           blocklist: ['string'],
           cost: 0,
           employees: ['string'],
@@ -134,9 +136,9 @@ describe('resource fill', () => {
               period: {
                 duration: 'P1D',
                 excludes: ['2022-03-10'],
-                from: '2022-03-10T12:15:50',
+                from: '2019-12-27T18:11:19.117Z',
                 period: 'P1D',
-                to: '2022-03-10T12:15:50',
+                to: '2019-12-27T18:11:19.117Z',
                 type: 'DAILY',
               },
               periodType: 'DAILY',
@@ -168,9 +170,9 @@ describe('resource fill', () => {
           period: {
             duration: 'P1D',
             excludes: ['2022-03-10'],
-            from: '2022-03-10T12:15:50',
+            from: '2019-12-27T18:11:19.117Z',
             period: 'P1D',
-            to: '2022-03-10T12:15:50',
+            to: '2019-12-27T18:11:19.117Z',
             type: 'DAILY',
           },
         },
@@ -208,9 +210,9 @@ describe('resource fill', () => {
           period: {
             duration: 'P1D',
             excludes: ['2022-03-10'],
-            from: '2022-03-10T12:15:50',
+            from: '2019-12-27T18:11:19.117Z',
             period: 'P1D',
-            to: '2022-03-10T12:15:50',
+            to: '2019-12-27T18:11:19.117Z',
             type: 'DAILY',
           },
           periodType: 'DAILY',
@@ -227,9 +229,9 @@ describe('resource fill', () => {
           period: {
             duration: 'P1D',
             excludes: ['2022-03-10'],
-            from: '2022-03-10T12:15:50',
+            from: '2019-12-27T18:11:19.117Z',
             period: 'P1D',
-            to: '2022-03-10T12:15:50',
+            to: '2019-12-27T18:11:19.117Z',
             type: 'DAILY',
           },
           shifts: ['string'],
@@ -277,7 +279,9 @@ describe('resource fill', () => {
   test.skip('solve: only required params', async () => {
     const responsePromise = client.fill.solve({
       employees: [{ name: 'name' }],
-      shifts: [{ from: '2022-03-10T12:15:50', max: 0, min: 0, name: 'name', to: '2022-03-10T12:15:50' }],
+      shifts: [
+        { from: '2019-12-27T18:11:19.117Z', max: 0, min: 0, name: 'name', to: '2019-12-27T18:11:19.117Z' },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -296,8 +300,8 @@ describe('resource fill', () => {
           name: 'name',
           availability: [
             {
-              from: '2022-03-10T12:15:50',
-              to: '2022-03-10T12:15:50',
+              from: '2019-12-27T18:11:19.117Z',
+              to: '2019-12-27T18:11:19.117Z',
               location: { lat: 51.12042, lon: 4.23054 },
             },
           ],
@@ -326,9 +330,9 @@ describe('resource fill', () => {
               period: {
                 duration: 'P1D',
                 excludes: ['2022-03-10'],
-                from: '2022-03-10T12:15:50',
+                from: '2019-12-27T18:11:19.117Z',
                 period: 'P1D',
-                to: '2022-03-10T12:15:50',
+                to: '2019-12-27T18:11:19.117Z',
                 type: 'DAILY',
               },
               earliestShiftStart: '13:45:30.123456789',
@@ -346,7 +350,7 @@ describe('resource fill', () => {
               minWorkingDuration: 'P1D',
             },
           ],
-          preferences: ['string'],
+          preference: ['string'],
           skills: [
             {
               name: 'name',
@@ -354,9 +358,9 @@ describe('resource fill', () => {
               period: {
                 duration: 'P1D',
                 excludes: ['2022-03-10'],
-                from: '2022-03-10T12:15:50',
+                from: '2019-12-27T18:11:19.117Z',
                 period: 'P1D',
-                to: '2022-03-10T12:15:50',
+                to: '2019-12-27T18:11:19.117Z',
                 type: 'DAILY',
               },
               weight: 0,
@@ -366,11 +370,11 @@ describe('resource fill', () => {
       ],
       shifts: [
         {
-          from: '2022-03-10T12:15:50',
+          from: '2019-12-27T18:11:19.117Z',
           max: 0,
           min: 0,
           name: 'name',
-          to: '2022-03-10T12:15:50',
+          to: '2019-12-27T18:11:19.117Z',
           blocklist: ['string'],
           cost: 0,
           employees: ['string'],
@@ -387,9 +391,9 @@ describe('resource fill', () => {
               period: {
                 duration: 'P1D',
                 excludes: ['2022-03-10'],
-                from: '2022-03-10T12:15:50',
+                from: '2019-12-27T18:11:19.117Z',
                 period: 'P1D',
-                to: '2022-03-10T12:15:50',
+                to: '2019-12-27T18:11:19.117Z',
                 type: 'DAILY',
               },
               periodType: 'DAILY',
@@ -421,9 +425,9 @@ describe('resource fill', () => {
           period: {
             duration: 'P1D',
             excludes: ['2022-03-10'],
-            from: '2022-03-10T12:15:50',
+            from: '2019-12-27T18:11:19.117Z',
             period: 'P1D',
-            to: '2022-03-10T12:15:50',
+            to: '2019-12-27T18:11:19.117Z',
             type: 'DAILY',
           },
         },
@@ -461,9 +465,9 @@ describe('resource fill', () => {
           period: {
             duration: 'P1D',
             excludes: ['2022-03-10'],
-            from: '2022-03-10T12:15:50',
+            from: '2019-12-27T18:11:19.117Z',
             period: 'P1D',
-            to: '2022-03-10T12:15:50',
+            to: '2019-12-27T18:11:19.117Z',
             type: 'DAILY',
           },
           periodType: 'DAILY',
@@ -480,9 +484,9 @@ describe('resource fill', () => {
           period: {
             duration: 'P1D',
             excludes: ['2022-03-10'],
-            from: '2022-03-10T12:15:50',
+            from: '2019-12-27T18:11:19.117Z',
             period: 'P1D',
-            to: '2022-03-10T12:15:50',
+            to: '2019-12-27T18:11:19.117Z',
             type: 'DAILY',
           },
           shifts: ['string'],
@@ -530,7 +534,9 @@ describe('resource fill', () => {
   test.skip('suggest: only required params', async () => {
     const responsePromise = client.fill.suggest({
       employees: [{ name: 'name' }],
-      shifts: [{ from: '2022-03-10T12:15:50', max: 0, min: 0, name: 'name', to: '2022-03-10T12:15:50' }],
+      shifts: [
+        { from: '2019-12-27T18:11:19.117Z', max: 0, min: 0, name: 'name', to: '2019-12-27T18:11:19.117Z' },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -549,8 +555,8 @@ describe('resource fill', () => {
           name: 'name',
           availability: [
             {
-              from: '2022-03-10T12:15:50',
-              to: '2022-03-10T12:15:50',
+              from: '2019-12-27T18:11:19.117Z',
+              to: '2019-12-27T18:11:19.117Z',
               location: { lat: 51.12042, lon: 4.23054 },
             },
           ],
@@ -579,9 +585,9 @@ describe('resource fill', () => {
               period: {
                 duration: 'P1D',
                 excludes: ['2022-03-10'],
-                from: '2022-03-10T12:15:50',
+                from: '2019-12-27T18:11:19.117Z',
                 period: 'P1D',
-                to: '2022-03-10T12:15:50',
+                to: '2019-12-27T18:11:19.117Z',
                 type: 'DAILY',
               },
               earliestShiftStart: '13:45:30.123456789',
@@ -599,7 +605,7 @@ describe('resource fill', () => {
               minWorkingDuration: 'P1D',
             },
           ],
-          preferences: ['string'],
+          preference: ['string'],
           skills: [
             {
               name: 'name',
@@ -607,9 +613,9 @@ describe('resource fill', () => {
               period: {
                 duration: 'P1D',
                 excludes: ['2022-03-10'],
-                from: '2022-03-10T12:15:50',
+                from: '2019-12-27T18:11:19.117Z',
                 period: 'P1D',
-                to: '2022-03-10T12:15:50',
+                to: '2019-12-27T18:11:19.117Z',
                 type: 'DAILY',
               },
               weight: 0,
@@ -619,11 +625,11 @@ describe('resource fill', () => {
       ],
       shifts: [
         {
-          from: '2022-03-10T12:15:50',
+          from: '2019-12-27T18:11:19.117Z',
           max: 0,
           min: 0,
           name: 'name',
-          to: '2022-03-10T12:15:50',
+          to: '2019-12-27T18:11:19.117Z',
           blocklist: ['string'],
           cost: 0,
           employees: ['string'],
@@ -640,9 +646,9 @@ describe('resource fill', () => {
               period: {
                 duration: 'P1D',
                 excludes: ['2022-03-10'],
-                from: '2022-03-10T12:15:50',
+                from: '2019-12-27T18:11:19.117Z',
                 period: 'P1D',
-                to: '2022-03-10T12:15:50',
+                to: '2019-12-27T18:11:19.117Z',
                 type: 'DAILY',
               },
               periodType: 'DAILY',
@@ -674,9 +680,9 @@ describe('resource fill', () => {
           period: {
             duration: 'P1D',
             excludes: ['2022-03-10'],
-            from: '2022-03-10T12:15:50',
+            from: '2019-12-27T18:11:19.117Z',
             period: 'P1D',
-            to: '2022-03-10T12:15:50',
+            to: '2019-12-27T18:11:19.117Z',
             type: 'DAILY',
           },
         },
@@ -714,9 +720,9 @@ describe('resource fill', () => {
           period: {
             duration: 'P1D',
             excludes: ['2022-03-10'],
-            from: '2022-03-10T12:15:50',
+            from: '2019-12-27T18:11:19.117Z',
             period: 'P1D',
-            to: '2022-03-10T12:15:50',
+            to: '2019-12-27T18:11:19.117Z',
             type: 'DAILY',
           },
           periodType: 'DAILY',
@@ -733,9 +739,9 @@ describe('resource fill', () => {
           period: {
             duration: 'P1D',
             excludes: ['2022-03-10'],
-            from: '2022-03-10T12:15:50',
+            from: '2019-12-27T18:11:19.117Z',
             period: 'P1D',
-            to: '2022-03-10T12:15:50',
+            to: '2019-12-27T18:11:19.117Z',
             type: 'DAILY',
           },
           shifts: ['string'],

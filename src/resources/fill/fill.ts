@@ -221,7 +221,7 @@ export namespace FillRequest {
     /**
      * Shift preferences of the employee. List of shift tags.
      */
-    preferences?: Array<string> | null;
+    preference?: Array<string> | null;
 
     /**
      * Skills of the employee
@@ -853,7 +853,8 @@ export interface Message {
  */
 export interface Period {
   /**
-   * Duration of the rolling period. Do not use this in combo with from/to
+   * Duration of the rolling period in ISO8601 format (e.g. P1D). Do not use this in
+   * combo with from/to
    */
   duration?: string | null;
 
@@ -868,7 +869,8 @@ export interface Period {
   from?: string | null;
 
   /**
-   * Duration of the rolling period. Do not use this in combo with from/to
+   * Duration of the rolling period in ISO8601 format (e.g. P1D). Do not use this in
+   * combo with from/to
    */
   period?: string | null;
 
@@ -1106,7 +1108,7 @@ export namespace FillEvaluateParams {
     /**
      * Shift preferences of the employee. List of shift tags.
      */
-    preferences?: Array<string> | null;
+    preference?: Array<string> | null;
 
     /**
      * Skills of the employee
@@ -1734,7 +1736,7 @@ export namespace FillSolveParams {
     /**
      * Shift preferences of the employee. List of shift tags.
      */
-    preferences?: Array<string> | null;
+    preference?: Array<string> | null;
 
     /**
      * Skills of the employee
@@ -2362,7 +2364,7 @@ export namespace FillSuggestParams {
     /**
      * Shift preferences of the employee. List of shift tags.
      */
-    preferences?: Array<string> | null;
+    preference?: Array<string> | null;
 
     /**
      * Skills of the employee
