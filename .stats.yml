@@ -1,4 +1,4 @@
 configured_endpoints: 8
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/solvice%2Fsolvice-shift-solver-3b06891947663c653196d06642dea7b0bbc0aa74157f48dd1f5d4666cbc8d165.yml
-openapi_spec_hash: 867dd089f5e3ef5d7ca33059c6a75c2c
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/solvice%2Fsolvice-shift-solver-6a1450e3fca0f5d91e5451dc86075eca93f8fd9f4dddcfc83c5a51eed594f708.yml
+openapi_spec_hash: 1ce263d0a27b8b30fd196c74b0d06090
 config_hash: b050caf73baf10f3f3dae012d5c1128a
