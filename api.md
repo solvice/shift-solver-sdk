@@ -3,7 +3,11 @@
 Types:
 
 - <code><a href="./src/resources/fill/fill.ts">DayOfWeek</a></code>
+- <code><a href="./src/resources/fill/fill.ts">FillExplanation</a></code>
+- <code><a href="./src/resources/fill/fill.ts">FillOptions</a></code>
 - <code><a href="./src/resources/fill/fill.ts">FillRequest</a></code>
+- <code><a href="./src/resources/fill/fill.ts">FillWeights</a></code>
+- <code><a href="./src/resources/fill/fill.ts">IdleWeekendDefinition</a></code>
 - <code><a href="./src/resources/fill/fill.ts">Message</a></code>
 - <code><a href="./src/resources/fill/fill.ts">Period</a></code>
 - <code><a href="./src/resources/fill/fill.ts">PeriodType</a></code>

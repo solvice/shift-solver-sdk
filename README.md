@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Solvice Shift Solver REST API from server-side TypeScript or JavaScript.
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.solvice.io](http://docs.solvice.io). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -26,7 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 import SolviceShiftSolver from 'solvice-shift-solver';
 
 const client = new SolviceShiftSolver({
-  apiKey: process.env['SOLVICE_SHIFT_SOLVER_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['SOLVICE_API_KEY'], // This is the default and can be omitted
 });
 
 const fillRequest = await client.fill.demo();
@@ -43,7 +43,7 @@ This library includes TypeScript definitions for all request params and response
 import SolviceShiftSolver from 'solvice-shift-solver';
 
 const client = new SolviceShiftSolver({
-  apiKey: process.env['SOLVICE_SHIFT_SOLVER_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['SOLVICE_API_KEY'], // This is the default and can be omitted
 });
 
 const fillRequest: SolviceShiftSolver.FillRequest = await client.fill.demo();

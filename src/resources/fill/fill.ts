@@ -49,6 +49,68 @@ export class Fill extends APIResource {
 export type DayOfWeek = 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
 
 /**
+ * Explanation
+ */
+export interface FillExplanation {
+  /**
+   * Whether to enable post-processing of explainability
+   */
+  enabled?: boolean | null;
+
+  /**
+   * Whether to filter hard constraint violated solutions in the response.
+   */
+  filterHardConstraints?: boolean | null;
+}
+
+export interface FillOptions {
+  /**
+   * Whether to always score shared skills
+   */
+  alwaysScoreSharedSkills?: boolean | null;
+
+  /**
+   * Explanation
+   */
+  explanation?: FillExplanation | null;
+
+  /**
+   * Whether to enforce availability constraints
+   */
+  hardAvailability?: boolean | null;
+
+  /**
+   * Whether to enforce blacklist constraints
+   */
+  hardBlacklist?: boolean | null;
+
+  /**
+   * Whether to enforce skill constraints
+   */
+  hardSkill?: boolean | null;
+
+  /**
+   * Idle weekend definition.
+   */
+  idleWeekend?: IdleWeekendDefinition | null;
+
+  /**
+   * Partial planning. Whether to fill all shifts or not. Default is false
+   */
+  partialPlanning?: boolean | null;
+
+  /**
+   * Whether to penalise employees with zero hours
+   */
+  penaliseZeroHours?: boolean | null;
+
+  /**
+   * Whether to use availability locations
+   */
+  useAvailabilityLocations?: boolean | null;
+}
+
+/**
  * FILL request for solving, evaluating
  */
 export interface FillRequest {
@@ -88,7 +150,7 @@ export interface FillRequest {
   /**
    * Options for tuning the solver
    */
-  options?: FillRequest.Options | null;
+  options?: FillOptions | null;
 
   /**
    * List of shift patterns. Patterns are sequences of shifts that can be desired or
@@ -117,7 +179,7 @@ export interface FillRequest {
   /**
    * Weights adjust objectives and scores.
    */
-  weights?: FillRequest.Weights | null;
+  weights?: FillWeights | null;
 }
 
 export namespace FillRequest {
@@ -497,100 +559,6 @@ export namespace FillRequest {
   }
 
   /**
-   * Options for tuning the solver
-   */
-  export interface Options {
-    /**
-     * Whether to always score shared skills
-     */
-    alwaysScoreSharedSkills?: boolean | null;
-
-    /**
-     * Explanation
-     */
-    explanation?: Options.Explanation | null;
-
-    /**
-     * Whether to enforce availability constraints
-     */
-    hardAvailability?: boolean | null;
-
-    /**
-     * Whether to enforce blacklist constraints
-     */
-    hardBlacklist?: boolean | null;
-
-    /**
-     * Whether to enforce skill constraints
-     */
-    hardSkill?: boolean | null;
-
-    /**
-     * Idle weekend definition.
-     */
-    idleWeekend?: Options.IdleWeekend | null;
-
-    /**
-     * Partial planning. Whether to fill all shifts or not. Default is false
-     */
-    partialPlanning?: boolean | null;
-
-    /**
-     * Whether to penalise employees with zero hours
-     */
-    penaliseZeroHours?: boolean | null;
-
-    /**
-     * Whether to use availability locations
-     */
-    useAvailabilityLocations?: boolean | null;
-  }
-
-  export namespace Options {
-    /**
-     * Explanation
-     */
-    export interface Explanation {
-      /**
-       * Whether to enable post-processing of explainability
-       */
-      enabled?: boolean | null;
-
-      /**
-       * Whether to filter hard constraint violated solutions in the response.
-       */
-      filterHardConstraints?: boolean | null;
-    }
-
-    /**
-     * Idle weekend definition.
-     */
-    export interface IdleWeekend {
-      /**
-       * Day of the week on which the weekend officially starts.
-       */
-      fromDayOfWeek: FillAPI.DayOfWeek;
-
-      /**
-       * Time of day on which the weekend officially starts.
-       */
-      fromTime: string;
-
-      /**
-       * Day of the week on which the weekend officially ends.
-       */
-      toDayOfWeek: FillAPI.DayOfWeek;
-
-      /**
-       * Time of day on which the weekend officially ends.
-       */
-      toTime: string;
-
-      restTime?: string | null;
-    }
-  }
-
-  /**
    * Pattern to describe (un)desired series of shifts. Based on a `satisfy` type
    * (`PREFERRED`, `PROHIBITED`, or `UNPREFERRED`)
    */
@@ -724,77 +692,98 @@ export namespace FillRequest {
      */
     locked?: boolean;
   }
+}
+
+export interface FillWeights {
+  availability?: string | null;
+
+  blacklist?: string | null;
+
+  concurrent?: string | null;
+
+  costs?: string | null;
+
+  criticalSkills?: string | null;
+
+  dayOfWeek?: string | null;
+
+  distance?: string | null;
+
+  distanceAL?: string | null;
+
+  efficiency?: string | null;
+
+  fairness?: string | null;
+
+  latestShiftStart?: string | null;
+
+  locked?: string | null;
+
+  maxConsecutive?: string | null;
+
+  maxHours?: string | null;
+
+  maxShift?: string | null;
+
+  maxWorkingDays?: string | null;
+
+  minHours?: string | null;
+
+  minHoursUnassigned?: string | null;
+
+  minRest?: string | null;
+
+  minShift?: string | null;
+
+  pref?: string | null;
+
+  priority?: string | null;
+
+  requirements?: string | null;
+
+  sameDay?: string | null;
+
+  sameDayMinRest?: string | null;
+
+  shiftEnd?: string | null;
+
+  shiftStart?: string | null;
+
+  skills?: string | null;
+
+  softSkills?: string | null;
+
+  softSkillsLevel?: string | null;
+
+  unassigned?: string | null;
+
+  wages?: string | null;
+
+  working?: string | null;
+}
+
+export interface IdleWeekendDefinition {
+  /**
+   * Day of the week on which the weekend officially starts.
+   */
+  fromDayOfWeek: DayOfWeek;
 
   /**
-   * Weights adjust objectives and scores.
+   * Time of day on which the weekend officially starts.
    */
-  export interface Weights {
-    availability?: string | null;
+  fromTime: string;
 
-    blacklist?: string | null;
+  /**
+   * Day of the week on which the weekend officially ends.
+   */
+  toDayOfWeek: DayOfWeek;
 
-    concurrent?: string | null;
+  /**
+   * Time of day on which the weekend officially ends.
+   */
+  toTime: string;
 
-    costs?: string | null;
-
-    criticalSkills?: string | null;
-
-    dayOfWeek?: string | null;
-
-    distance?: string | null;
-
-    distanceAL?: string | null;
-
-    efficiency?: string | null;
-
-    fairness?: string | null;
-
-    latestShiftStart?: string | null;
-
-    locked?: string | null;
-
-    maxConsecutive?: string | null;
-
-    maxHours?: string | null;
-
-    maxShift?: string | null;
-
-    maxWorkingDays?: string | null;
-
-    minHours?: string | null;
-
-    minHoursUnassigned?: string | null;
-
-    minRest?: string | null;
-
-    minShift?: string | null;
-
-    pref?: string | null;
-
-    priority?: string | null;
-
-    requirements?: string | null;
-
-    sameDay?: string | null;
-
-    sameDayMinRest?: string | null;
-
-    shiftEnd?: string | null;
-
-    shiftStart?: string | null;
-
-    skills?: string | null;
-
-    softSkills?: string | null;
-
-    softSkillsLevel?: string | null;
-
-    unassigned?: string | null;
-
-    wages?: string | null;
-
-    working?: string | null;
-  }
+  restTime?: string | null;
 }
 
 /**
@@ -1001,7 +990,7 @@ export interface FillEvaluateParams {
   /**
    * Options for tuning the solver
    */
-  options?: FillEvaluateParams.Options | null;
+  options?: FillOptions | null;
 
   /**
    * List of shift patterns. Patterns are sequences of shifts that can be desired or
@@ -1030,7 +1019,7 @@ export interface FillEvaluateParams {
   /**
    * Weights adjust objectives and scores.
    */
-  weights?: FillEvaluateParams.Weights | null;
+  weights?: FillWeights | null;
 }
 
 export namespace FillEvaluateParams {
@@ -1410,100 +1399,6 @@ export namespace FillEvaluateParams {
   }
 
   /**
-   * Options for tuning the solver
-   */
-  export interface Options {
-    /**
-     * Whether to always score shared skills
-     */
-    alwaysScoreSharedSkills?: boolean | null;
-
-    /**
-     * Explanation
-     */
-    explanation?: Options.Explanation | null;
-
-    /**
-     * Whether to enforce availability constraints
-     */
-    hardAvailability?: boolean | null;
-
-    /**
-     * Whether to enforce blacklist constraints
-     */
-    hardBlacklist?: boolean | null;
-
-    /**
-     * Whether to enforce skill constraints
-     */
-    hardSkill?: boolean | null;
-
-    /**
-     * Idle weekend definition.
-     */
-    idleWeekend?: Options.IdleWeekend | null;
-
-    /**
-     * Partial planning. Whether to fill all shifts or not. Default is false
-     */
-    partialPlanning?: boolean | null;
-
-    /**
-     * Whether to penalise employees with zero hours
-     */
-    penaliseZeroHours?: boolean | null;
-
-    /**
-     * Whether to use availability locations
-     */
-    useAvailabilityLocations?: boolean | null;
-  }
-
-  export namespace Options {
-    /**
-     * Explanation
-     */
-    export interface Explanation {
-      /**
-       * Whether to enable post-processing of explainability
-       */
-      enabled?: boolean | null;
-
-      /**
-       * Whether to filter hard constraint violated solutions in the response.
-       */
-      filterHardConstraints?: boolean | null;
-    }
-
-    /**
-     * Idle weekend definition.
-     */
-    export interface IdleWeekend {
-      /**
-       * Day of the week on which the weekend officially starts.
-       */
-      fromDayOfWeek: FillAPI.DayOfWeek;
-
-      /**
-       * Time of day on which the weekend officially starts.
-       */
-      fromTime: string;
-
-      /**
-       * Day of the week on which the weekend officially ends.
-       */
-      toDayOfWeek: FillAPI.DayOfWeek;
-
-      /**
-       * Time of day on which the weekend officially ends.
-       */
-      toTime: string;
-
-      restTime?: string | null;
-    }
-  }
-
-  /**
    * Pattern to describe (un)desired series of shifts. Based on a `satisfy` type
    * (`PREFERRED`, `PROHIBITED`, or `UNPREFERRED`)
    */
@@ -1637,77 +1532,6 @@ export namespace FillEvaluateParams {
      */
     locked?: boolean;
   }
-
-  /**
-   * Weights adjust objectives and scores.
-   */
-  export interface Weights {
-    availability?: string | null;
-
-    blacklist?: string | null;
-
-    concurrent?: string | null;
-
-    costs?: string | null;
-
-    criticalSkills?: string | null;
-
-    dayOfWeek?: string | null;
-
-    distance?: string | null;
-
-    distanceAL?: string | null;
-
-    efficiency?: string | null;
-
-    fairness?: string | null;
-
-    latestShiftStart?: string | null;
-
-    locked?: string | null;
-
-    maxConsecutive?: string | null;
-
-    maxHours?: string | null;
-
-    maxShift?: string | null;
-
-    maxWorkingDays?: string | null;
-
-    minHours?: string | null;
-
-    minHoursUnassigned?: string | null;
-
-    minRest?: string | null;
-
-    minShift?: string | null;
-
-    pref?: string | null;
-
-    priority?: string | null;
-
-    requirements?: string | null;
-
-    sameDay?: string | null;
-
-    sameDayMinRest?: string | null;
-
-    shiftEnd?: string | null;
-
-    shiftStart?: string | null;
-
-    skills?: string | null;
-
-    softSkills?: string | null;
-
-    softSkillsLevel?: string | null;
-
-    unassigned?: string | null;
-
-    wages?: string | null;
-
-    working?: string | null;
-  }
 }
 
 export interface FillSolveParams {
@@ -1747,7 +1571,7 @@ export interface FillSolveParams {
   /**
    * Options for tuning the solver
    */
-  options?: FillSolveParams.Options | null;
+  options?: FillOptions | null;
 
   /**
    * List of shift patterns. Patterns are sequences of shifts that can be desired or
@@ -1776,7 +1600,7 @@ export interface FillSolveParams {
   /**
    * Weights adjust objectives and scores.
    */
-  weights?: FillSolveParams.Weights | null;
+  weights?: FillWeights | null;
 }
 
 export namespace FillSolveParams {
@@ -2156,100 +1980,6 @@ export namespace FillSolveParams {
   }
 
   /**
-   * Options for tuning the solver
-   */
-  export interface Options {
-    /**
-     * Whether to always score shared skills
-     */
-    alwaysScoreSharedSkills?: boolean | null;
-
-    /**
-     * Explanation
-     */
-    explanation?: Options.Explanation | null;
-
-    /**
-     * Whether to enforce availability constraints
-     */
-    hardAvailability?: boolean | null;
-
-    /**
-     * Whether to enforce blacklist constraints
-     */
-    hardBlacklist?: boolean | null;
-
-    /**
-     * Whether to enforce skill constraints
-     */
-    hardSkill?: boolean | null;
-
-    /**
-     * Idle weekend definition.
-     */
-    idleWeekend?: Options.IdleWeekend | null;
-
-    /**
-     * Partial planning. Whether to fill all shifts or not. Default is false
-     */
-    partialPlanning?: boolean | null;
-
-    /**
-     * Whether to penalise employees with zero hours
-     */
-    penaliseZeroHours?: boolean | null;
-
-    /**
-     * Whether to use availability locations
-     */
-    useAvailabilityLocations?: boolean | null;
-  }
-
-  export namespace Options {
-    /**
-     * Explanation
-     */
-    export interface Explanation {
-      /**
-       * Whether to enable post-processing of explainability
-       */
-      enabled?: boolean | null;
-
-      /**
-       * Whether to filter hard constraint violated solutions in the response.
-       */
-      filterHardConstraints?: boolean | null;
-    }
-
-    /**
-     * Idle weekend definition.
-     */
-    export interface IdleWeekend {
-      /**
-       * Day of the week on which the weekend officially starts.
-       */
-      fromDayOfWeek: FillAPI.DayOfWeek;
-
-      /**
-       * Time of day on which the weekend officially starts.
-       */
-      fromTime: string;
-
-      /**
-       * Day of the week on which the weekend officially ends.
-       */
-      toDayOfWeek: FillAPI.DayOfWeek;
-
-      /**
-       * Time of day on which the weekend officially ends.
-       */
-      toTime: string;
-
-      restTime?: string | null;
-    }
-  }
-
-  /**
    * Pattern to describe (un)desired series of shifts. Based on a `satisfy` type
    * (`PREFERRED`, `PROHIBITED`, or `UNPREFERRED`)
    */
@@ -2383,77 +2113,6 @@ export namespace FillSolveParams {
      */
     locked?: boolean;
   }
-
-  /**
-   * Weights adjust objectives and scores.
-   */
-  export interface Weights {
-    availability?: string | null;
-
-    blacklist?: string | null;
-
-    concurrent?: string | null;
-
-    costs?: string | null;
-
-    criticalSkills?: string | null;
-
-    dayOfWeek?: string | null;
-
-    distance?: string | null;
-
-    distanceAL?: string | null;
-
-    efficiency?: string | null;
-
-    fairness?: string | null;
-
-    latestShiftStart?: string | null;
-
-    locked?: string | null;
-
-    maxConsecutive?: string | null;
-
-    maxHours?: string | null;
-
-    maxShift?: string | null;
-
-    maxWorkingDays?: string | null;
-
-    minHours?: string | null;
-
-    minHoursUnassigned?: string | null;
-
-    minRest?: string | null;
-
-    minShift?: string | null;
-
-    pref?: string | null;
-
-    priority?: string | null;
-
-    requirements?: string | null;
-
-    sameDay?: string | null;
-
-    sameDayMinRest?: string | null;
-
-    shiftEnd?: string | null;
-
-    shiftStart?: string | null;
-
-    skills?: string | null;
-
-    softSkills?: string | null;
-
-    softSkillsLevel?: string | null;
-
-    unassigned?: string | null;
-
-    wages?: string | null;
-
-    working?: string | null;
-  }
 }
 
 export interface FillSuggestParams {
@@ -2493,7 +2152,7 @@ export interface FillSuggestParams {
   /**
    * Options for tuning the solver
    */
-  options?: FillSuggestParams.Options | null;
+  options?: FillOptions | null;
 
   /**
    * List of shift patterns. Patterns are sequences of shifts that can be desired or
@@ -2522,7 +2181,7 @@ export interface FillSuggestParams {
   /**
    * Weights adjust objectives and scores.
    */
-  weights?: FillSuggestParams.Weights | null;
+  weights?: FillWeights | null;
 }
 
 export namespace FillSuggestParams {
@@ -2902,100 +2561,6 @@ export namespace FillSuggestParams {
   }
 
   /**
-   * Options for tuning the solver
-   */
-  export interface Options {
-    /**
-     * Whether to always score shared skills
-     */
-    alwaysScoreSharedSkills?: boolean | null;
-
-    /**
-     * Explanation
-     */
-    explanation?: Options.Explanation | null;
-
-    /**
-     * Whether to enforce availability constraints
-     */
-    hardAvailability?: boolean | null;
-
-    /**
-     * Whether to enforce blacklist constraints
-     */
-    hardBlacklist?: boolean | null;
-
-    /**
-     * Whether to enforce skill constraints
-     */
-    hardSkill?: boolean | null;
-
-    /**
-     * Idle weekend definition.
-     */
-    idleWeekend?: Options.IdleWeekend | null;
-
-    /**
-     * Partial planning. Whether to fill all shifts or not. Default is false
-     */
-    partialPlanning?: boolean | null;
-
-    /**
-     * Whether to penalise employees with zero hours
-     */
-    penaliseZeroHours?: boolean | null;
-
-    /**
-     * Whether to use availability locations
-     */
-    useAvailabilityLocations?: boolean | null;
-  }
-
-  export namespace Options {
-    /**
-     * Explanation
-     */
-    export interface Explanation {
-      /**
-       * Whether to enable post-processing of explainability
-       */
-      enabled?: boolean | null;
-
-      /**
-       * Whether to filter hard constraint violated solutions in the response.
-       */
-      filterHardConstraints?: boolean | null;
-    }
-
-    /**
-     * Idle weekend definition.
-     */
-    export interface IdleWeekend {
-      /**
-       * Day of the week on which the weekend officially starts.
-       */
-      fromDayOfWeek: FillAPI.DayOfWeek;
-
-      /**
-       * Time of day on which the weekend officially starts.
-       */
-      fromTime: string;
-
-      /**
-       * Day of the week on which the weekend officially ends.
-       */
-      toDayOfWeek: FillAPI.DayOfWeek;
-
-      /**
-       * Time of day on which the weekend officially ends.
-       */
-      toTime: string;
-
-      restTime?: string | null;
-    }
-  }
-
-  /**
    * Pattern to describe (un)desired series of shifts. Based on a `satisfy` type
    * (`PREFERRED`, `PROHIBITED`, or `UNPREFERRED`)
    */
@@ -3129,77 +2694,6 @@ export namespace FillSuggestParams {
      */
     locked?: boolean;
   }
-
-  /**
-   * Weights adjust objectives and scores.
-   */
-  export interface Weights {
-    availability?: string | null;
-
-    blacklist?: string | null;
-
-    concurrent?: string | null;
-
-    costs?: string | null;
-
-    criticalSkills?: string | null;
-
-    dayOfWeek?: string | null;
-
-    distance?: string | null;
-
-    distanceAL?: string | null;
-
-    efficiency?: string | null;
-
-    fairness?: string | null;
-
-    latestShiftStart?: string | null;
-
-    locked?: string | null;
-
-    maxConsecutive?: string | null;
-
-    maxHours?: string | null;
-
-    maxShift?: string | null;
-
-    maxWorkingDays?: string | null;
-
-    minHours?: string | null;
-
-    minHoursUnassigned?: string | null;
-
-    minRest?: string | null;
-
-    minShift?: string | null;
-
-    pref?: string | null;
-
-    priority?: string | null;
-
-    requirements?: string | null;
-
-    sameDay?: string | null;
-
-    sameDayMinRest?: string | null;
-
-    shiftEnd?: string | null;
-
-    shiftStart?: string | null;
-
-    skills?: string | null;
-
-    softSkills?: string | null;
-
-    softSkillsLevel?: string | null;
-
-    unassigned?: string | null;
-
-    wages?: string | null;
-
-    working?: string | null;
-  }
 }
 
 Fill.Jobs = Jobs;
@@ -3207,7 +2701,11 @@ Fill.Jobs = Jobs;
 export declare namespace Fill {
   export {
     type DayOfWeek as DayOfWeek,
+    type FillExplanation as FillExplanation,
+    type FillOptions as FillOptions,
     type FillRequest as FillRequest,
+    type FillWeights as FillWeights,
+    type IdleWeekendDefinition as IdleWeekendDefinition,
     type Message as Message,
     type Period as Period,
     type PeriodType as PeriodType,

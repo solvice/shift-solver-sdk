@@ -20,9 +20,13 @@ import {
   DayOfWeek,
   Fill,
   FillEvaluateParams,
+  FillExplanation,
+  FillOptions,
   FillRequest,
   FillSolveParams,
   FillSuggestParams,
+  FillWeights,
+  IdleWeekendDefinition,
   Message,
   Period,
   PeriodType,
@@ -140,7 +144,7 @@ export class SolviceShiftSolver {
   /**
    * API Client for interfacing with the Solvice Shift Solver API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['SOLVICE_SHIFT_SOLVER_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.apiKey=process.env['SOLVICE_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['SOLVICE_SHIFT_SOLVER_BASE_URL'] ?? https://api.solvice.io] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -151,12 +155,12 @@ export class SolviceShiftSolver {
    */
   constructor({
     baseURL = readEnv('SOLVICE_SHIFT_SOLVER_BASE_URL'),
-    apiKey = readEnv('SOLVICE_SHIFT_SOLVER_API_KEY'),
+    apiKey = readEnv('SOLVICE_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.SolviceShiftSolverError(
-        "The SOLVICE_SHIFT_SOLVER_API_KEY environment variable is missing or empty; either provide it, or instantiate the SolviceShiftSolver client with an apiKey option, like new SolviceShiftSolver({ apiKey: 'My API Key' }).",
+        "The SOLVICE_API_KEY environment variable is missing or empty; either provide it, or instantiate the SolviceShiftSolver client with an apiKey option, like new SolviceShiftSolver({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -739,7 +743,11 @@ export declare namespace SolviceShiftSolver {
   export {
     Fill as Fill,
     type DayOfWeek as DayOfWeek,
+    type FillExplanation as FillExplanation,
+    type FillOptions as FillOptions,
     type FillRequest as FillRequest,
+    type FillWeights as FillWeights,
+    type IdleWeekendDefinition as IdleWeekendDefinition,
     type Message as Message,
     type Period as Period,
     type PeriodType as PeriodType,
