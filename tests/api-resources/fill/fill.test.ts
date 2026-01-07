@@ -25,7 +25,13 @@ describe('resource fill', () => {
     const responsePromise = client.fill.evaluate({
       employees: [{ name: 'name' }],
       shifts: [
-        { from: '2019-12-27T18:11:19.117Z', max: 0, min: 0, name: 'name', to: '2019-12-27T18:11:19.117Z' },
+        {
+          from: '2019-12-27T18:11:19.117Z',
+          max: 0,
+          min: 0,
+          name: 'name',
+          to: '2019-12-27T18:11:19.117Z',
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -146,17 +152,35 @@ describe('resource fill', () => {
               tags: ['string'],
             },
           ],
-          skills: [{ name: 'name', hard: true, weight: 0 }],
+          skills: [
+            {
+              name: 'name',
+              hard: true,
+              weight: 0,
+            },
+          ],
           tags: [{ name: 'name' }],
           value: 0,
         },
       ],
-      assignments: [{ employee: 'employee', shift: 'shift', locked: true }],
+      assignments: [
+        {
+          employee: 'employee',
+          shift: 'shift',
+          locked: true,
+        },
+      ],
       demands: [
         {
           from: '2022-03-10T12:15:50-04:00',
           name: 'name',
-          skills: [{ name: 'name', hard: true, weight: 0 }],
+          skills: [
+            {
+              name: 'name',
+              hard: true,
+              weight: 0,
+            },
+          ],
           to: '2022-03-10T12:15:50-04:00',
           max: 0,
           min: 0,
@@ -197,9 +221,20 @@ describe('resource fill', () => {
         useAvailabilityLocations: true,
       },
       patterns: [
-        { elements: [{ tags: ['string'], type: 'ON' }], satisfy: 'PREFERRED', type: 'SINGLE_DAY', weight: 0 },
+        {
+          elements: [{ tags: ['string'], type: 'ON' }],
+          satisfy: 'PREFERRED',
+          type: 'SINGLE_DAY',
+          weight: 0,
+        },
       ],
-      requirements: [{ shifts: ['string'], skill: 'skill', value: 0 }],
+      requirements: [
+        {
+          shifts: ['string'],
+          skill: 'skill',
+          value: 0,
+        },
+      ],
       rests: [
         {
           excludes: ['string'],
@@ -280,7 +315,13 @@ describe('resource fill', () => {
     const responsePromise = client.fill.solve({
       employees: [{ name: 'name' }],
       shifts: [
-        { from: '2019-12-27T18:11:19.117Z', max: 0, min: 0, name: 'name', to: '2019-12-27T18:11:19.117Z' },
+        {
+          from: '2019-12-27T18:11:19.117Z',
+          max: 0,
+          min: 0,
+          name: 'name',
+          to: '2019-12-27T18:11:19.117Z',
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -401,17 +442,35 @@ describe('resource fill', () => {
               tags: ['string'],
             },
           ],
-          skills: [{ name: 'name', hard: true, weight: 0 }],
+          skills: [
+            {
+              name: 'name',
+              hard: true,
+              weight: 0,
+            },
+          ],
           tags: [{ name: 'name' }],
           value: 0,
         },
       ],
-      assignments: [{ employee: 'employee', shift: 'shift', locked: true }],
+      assignments: [
+        {
+          employee: 'employee',
+          shift: 'shift',
+          locked: true,
+        },
+      ],
       demands: [
         {
           from: '2022-03-10T12:15:50-04:00',
           name: 'name',
-          skills: [{ name: 'name', hard: true, weight: 0 }],
+          skills: [
+            {
+              name: 'name',
+              hard: true,
+              weight: 0,
+            },
+          ],
           to: '2022-03-10T12:15:50-04:00',
           max: 0,
           min: 0,
@@ -452,9 +511,20 @@ describe('resource fill', () => {
         useAvailabilityLocations: true,
       },
       patterns: [
-        { elements: [{ tags: ['string'], type: 'ON' }], satisfy: 'PREFERRED', type: 'SINGLE_DAY', weight: 0 },
+        {
+          elements: [{ tags: ['string'], type: 'ON' }],
+          satisfy: 'PREFERRED',
+          type: 'SINGLE_DAY',
+          weight: 0,
+        },
       ],
-      requirements: [{ shifts: ['string'], skill: 'skill', value: 0 }],
+      requirements: [
+        {
+          shifts: ['string'],
+          skill: 'skill',
+          value: 0,
+        },
+      ],
       rests: [
         {
           excludes: ['string'],
@@ -535,7 +605,13 @@ describe('resource fill', () => {
     const responsePromise = client.fill.suggest({
       employees: [{ name: 'name' }],
       shifts: [
-        { from: '2019-12-27T18:11:19.117Z', max: 0, min: 0, name: 'name', to: '2019-12-27T18:11:19.117Z' },
+        {
+          from: '2019-12-27T18:11:19.117Z',
+          max: 0,
+          min: 0,
+          name: 'name',
+          to: '2019-12-27T18:11:19.117Z',
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -656,17 +732,35 @@ describe('resource fill', () => {
               tags: ['string'],
             },
           ],
-          skills: [{ name: 'name', hard: true, weight: 0 }],
+          skills: [
+            {
+              name: 'name',
+              hard: true,
+              weight: 0,
+            },
+          ],
           tags: [{ name: 'name' }],
           value: 0,
         },
       ],
-      assignments: [{ employee: 'employee', shift: 'shift', locked: true }],
+      assignments: [
+        {
+          employee: 'employee',
+          shift: 'shift',
+          locked: true,
+        },
+      ],
       demands: [
         {
           from: '2022-03-10T12:15:50-04:00',
           name: 'name',
-          skills: [{ name: 'name', hard: true, weight: 0 }],
+          skills: [
+            {
+              name: 'name',
+              hard: true,
+              weight: 0,
+            },
+          ],
           to: '2022-03-10T12:15:50-04:00',
           max: 0,
           min: 0,
@@ -707,9 +801,20 @@ describe('resource fill', () => {
         useAvailabilityLocations: true,
       },
       patterns: [
-        { elements: [{ tags: ['string'], type: 'ON' }], satisfy: 'PREFERRED', type: 'SINGLE_DAY', weight: 0 },
+        {
+          elements: [{ tags: ['string'], type: 'ON' }],
+          satisfy: 'PREFERRED',
+          type: 'SINGLE_DAY',
+          weight: 0,
+        },
       ],
-      requirements: [{ shifts: ['string'], skill: 'skill', value: 0 }],
+      requirements: [
+        {
+          shifts: ['string'],
+          skill: 'skill',
+          value: 0,
+        },
+      ],
       rests: [
         {
           excludes: ['string'],
