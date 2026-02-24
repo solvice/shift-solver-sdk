@@ -60,7 +60,7 @@ $ yarn link solvice-shift-solver
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global solvice-shift-solver
+$ pnpm link --global solvice-shift-solver
 ```
 
 ## Running tests
