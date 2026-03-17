@@ -8,7 +8,7 @@ const client = new SolviceShiftSolver({
 });
 
 describe('resource fill', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('demo', async () => {
     const responsePromise = client.fill.demo();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource fill', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('evaluate: only required params', async () => {
     const responsePromise = client.fill.evaluate({
       employees: [{ name: 'name' }],
@@ -43,7 +43,7 @@ describe('resource fill', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('evaluate: required and optional params', async () => {
     const response = await client.fill.evaluate({
       employees: [
@@ -310,7 +310,7 @@ describe('resource fill', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('solve: only required params', async () => {
     const responsePromise = client.fill.solve({
       employees: [{ name: 'name' }],
@@ -333,7 +333,7 @@ describe('resource fill', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('solve: required and optional params', async () => {
     const response = await client.fill.solve({
       employees: [
@@ -600,7 +600,7 @@ describe('resource fill', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('suggest: only required params', async () => {
     const responsePromise = client.fill.suggest({
       employees: [{ name: 'name' }],
@@ -623,7 +623,7 @@ describe('resource fill', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('suggest: required and optional params', async () => {
     const response = await client.fill.suggest({
       employees: [
